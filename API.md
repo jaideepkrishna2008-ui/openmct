@@ -1002,12 +1002,15 @@ An example clock implementation is provided in the form of the [LocalClock](http
 Once registered a clock can be activated by calling the `setClock` function on the
 Time API passing in the key or instance of a registered clock. Only one clock
 may be active at once, so activating a clock will deactivate any currently
-active clock and start the new clock. [`clockOffsets`](#clock-offsets) must be specified when changing a clock.
+active clock and start the new clock. `setClock` takes only the clock. It does not change the
+[clock offsets](#clock-offsets) or the bounds. Set the offsets afterwards with `setClockOffsets`, or
+pass them to `setMode('realtime', clockOffsets)`.
 
-Setting the clock triggers a [`'clockChanged'`](#time-events) event, followed by a [`'clockOffsetsChanged'`](#time-events) event, and then a [`'boundsChanged'`](#time-events) event as the offsets are applied to the clock's currentValue().
+Setting the clock triggers a [`'clockChanged'`](#time-events) event.
 
-```
-openmct.time.setClock(someClock, clockOffsets);
+```javascript
+openmct.time.setClock(someClock);
+openmct.time.setClockOffsets(clockOffsets);
 ```
 
 Upon being activated, the time API will listen for tick events on the clock by calling `clock.on`.
@@ -1052,7 +1055,7 @@ value provided by a clock's tick callback, or its `currentValue()` function.
 - `end`: A `number` that must be >= 0 and which is used to calculate the end
 bounds on each clock tick.
 
-The `setClockOffsets` function can be used to get or set clock offsets. For example,
+The `setClockOffsets` function sets the clock offsets. For example,
 to show the last fifteen minutes in a ms-based time system:
 
 ```javascript

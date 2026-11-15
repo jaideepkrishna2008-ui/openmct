@@ -515,7 +515,6 @@ class TimeContext extends EventEmitter {
   /**
    * Set the active clock. Tick source will be immediately subscribed to
    * and the currently ticking will begin.
-   * Offsets from 'now', if provided, will be used to set realtime mode offsets
    *
    * @param {string|Clock} keyOrClock The clock to activate, or its key
    */

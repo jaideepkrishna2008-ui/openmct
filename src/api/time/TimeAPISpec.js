@@ -316,7 +316,7 @@ describe('The Time API', function () {
     });
 
     it('a new tick listener is registered', function () {
-      api.setClock('mts', mockOffsets);
+      api.setClock('mts');
       expect(mockTickSource.on).toHaveBeenCalledWith('tick', jasmine.any(Function));
     });
 
